@@ -1,0 +1,142 @@
+version: "3.7"
+services:
+  mongodb:
+    image : mongo:4.4.6
+    container_name: mongodb
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./mongo/db:/data/db
+    ports:
+      - 27017:27017
+    restart: always
+
+  zookeeper-1:
+    image: confluentinc/cp-zookeeper:6.1.1
+    container_name: zookeeper-1
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+    restart: always
+
+  kafka-1:
+    image: confluentinc/cp-kafka:6.1.1
+    container_name: kafka-1
+    hostname: kafka-1
+    depends_on:
+      - zookeeper-1
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    restart: always
+  
+  kafka-2:
+    image: confluentinc/cp-kafka:6.1.1
+    container_name: kafka-2
+    hostname: kafka-2
+    depends_on:
+      - zookeeper-1
+    ports:
+      - 39092:39092
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:9092,PLAINTEXT_HOST://localhost:39092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    restart: always
+
+  kafka-3:
+    image: confluentinc/cp-kafka:6.1.1
+    container_name: kafka-3
+    hostname: kafka-3
+    depends_on:
+      - zookeeper-1
+    ports:
+      - 49092:49092
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:9092,PLAINTEXT_HOST://localhost:49092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    restart: always
+
+  kafka-setup:
+    image: confluentinc/cp-kafka:6.1.1
+    hostname: kafka-setup
+    container_name: kafka-setup
+    depends_on:
+      - zookeeper-1
+      - kafka-1
+      - kafka-2
+      - kafka-3
+    command: "bash -c 'echo Waiting for the Kafka cluster to be ready... && \
+                        cub kafka-ready -b kafka-1:9092,kafka-2:9092,kafka-3:9092 3 1200 && \
+                        kafka-topics \
+                        --create --if-not-exists \
+                        --zookeeper zookeeper-1:2181 \
+                        --partitions 10 \
+                        --replication-factor 3 \
+                        --config min.insync.replicas=2 \
+                        --topic transactions'"
+    environment:
+      KAFKA_BROKER_ID: ignored
+      KAFKA_ZOOKEEPER_CONNECT: ignored
+
+  nifi-file-reader:
+    image: apache/nifi:1.12.1
+    container_name: nifi-file-reader
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nifi_file/input:/opt/nifi/nifi-current/input
+    depends_on:
+      - "kafka-1"
+      - "kafka-2"
+      - "mongodb"
+    restart: always
+
+  nifi-kafka-consumer:
+    image: apache/nifi:1.12.1
+    container_name: nifi-kafka-consumer
+    ports:
+      - "9090:8080"
+    volumes:
+      - ./nifi_mongo/input:/opt/nifi/nifi-current/input
+    depends_on:
+      - "kafka-1"
+      - "kafka-2"
+      - "mongodb"
+    restart: always
+
+  nifi-registry:
+    image: michalklempa/nifi-registry:0.8.0-01
+    container_name: nifi-registry
+    volumes:
+      - # /seu/diretorio/para/chaves/ssh:/home/nifi/.ssh
+    ports:
+      - target: 18080
+        published: 18080
+        protocol: tcp
+        mode: host
+    environment:
+      FLOW_PROVIDER: git
+      GIT_REMOTE_URL: git@github.com:imacellone/nifi-registry.git
+      GIT_CHECKOUT_BRANCH: master
+      FLOW_PROVIDER_GIT_FLOW_STORAGE_DIRECTORY: /opt/nifi-registry/flow-storage-git
+      FLOW_PROVIDER_GIT_REMOTE_TO_PUSH: origin
+      GIT_CONFIG_USER_NAME: # Seu nome completo entre aspas simples
+      GIT_CONFIG_USER_EMAIL: # Seu e-mail associado à sua conta do GitHub
+    restart: always
