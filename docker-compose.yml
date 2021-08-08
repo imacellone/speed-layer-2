@@ -140,6 +140,7 @@ services:
       GIT_CONFIG_USER_NAME: 'italomacellone@gmail.com'
       GIT_CONFIG_USER_EMAIL: italomacellone@gmail.com
     restart: always
+
   streaming:
     image: alpine:3.14.1
     container_name: streaming
@@ -148,13 +149,23 @@ services:
       - ./streaming/input:/data/input
       - ./streaming/output:/data/output
     command: "sh -c 'chmod +x /data/streaming.sh && cd /data && sh streaming.sh'"
-    depends_on:
+     depends_on:
       - "mongodb"
       - "zookeeper-1"
       - "kafka-1"
       - "kafka-2"
       - "kafka-3"
-      - "kafka-setup"
       - "nifi-file-reader"
       - "nifi-kafka-consumer"
-      - "nifi-registry
+      - "nifi-registry"
+      
+  jupyter:
+    build: ./jupyter
+    container_name: jupyter
+    volumes:
+      - ./jupyter/notebooks:/opt/notebooks
+    ports:
+      - "8888:8888"
+    depends_on:
+      - "mongodb"
+    restart: always
