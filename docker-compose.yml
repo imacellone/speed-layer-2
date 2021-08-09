@@ -101,7 +101,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./nifi_file/input:/opt/nifi/nifi-current/input
+      - ./streaming/output:/opt/nifi/nifi-current/input
     depends_on:
       - "kafka-1"
       - "kafka-2"
@@ -133,28 +133,10 @@ services:
         mode: host
     environment:
       FLOW_PROVIDER: git
-      GIT_REMOTE_URL: git@github.com:imacellone/nifi-registry.git
+      GIT_REMOTE_URL: git@github.com:imacellone/nifi-registry-2.git
       GIT_CHECKOUT_BRANCH: master
       FLOW_PROVIDER_GIT_FLOW_STORAGE_DIRECTORY: /opt/nifi-registry/flow-storage-git
       FLOW_PROVIDER_GIT_REMOTE_TO_PUSH: origin
       GIT_CONFIG_USER_NAME: 'italomacellone@gmail.com'
       GIT_CONFIG_USER_EMAIL: italomacellone@gmail.com
     restart: always
-  streaming:
-    image: alpine:3.14.1
-    container_name: streaming
-    volumes:
-      - ./streaming:/data
-      - ./streaming/input:/data/input
-      - ./streaming/output:/data/output
-    command: "sh -c 'chmod +x /data/streaming.sh && cd /data && sh streaming.sh'"
-    depends_on:
-      - "mongodb"
-      - "zookeeper-1"
-      - "kafka-1"
-      - "kafka-2"
-      - "kafka-3"
-      - "kafka-setup"
-      - "nifi-file-reader"
-      - "nifi-kafka-consumer"
-      - "nifi-registry
