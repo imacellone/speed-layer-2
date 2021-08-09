@@ -140,3 +140,14 @@ services:
       GIT_CONFIG_USER_NAME: 'italomacellone@gmail.com'
       GIT_CONFIG_USER_EMAIL: italomacellone@gmail.com
     restart: always
+      
+  jupyter:
+    build: ./jupyter
+    container_name: jupyter
+    volumes:
+      - ./jupyter/notebooks:/opt/notebooks
+    ports:
+      - "8888:8888"
+    depends_on:
+      - "mongodb"
+    restart: always
