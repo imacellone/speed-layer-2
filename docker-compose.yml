@@ -113,8 +113,6 @@ services:
     container_name: nifi-kafka-consumer
     ports:
       - "9090:8080"
-    volumes:
-      - ./nifi_mongo/input:/opt/nifi/nifi-current/input
     depends_on:
       - "kafka-1"
       - "kafka-2"
@@ -126,7 +124,7 @@ services:
     container_name: nifi-registry
     volumes:
     # REPLACE THE DIRECTORY BEFORE THE : WITH THE ONE THAT CONTAINS YOUR SSH KEYS
-      - /Users/italo/.ssh:/home/nifi/.ssh # DO NOT USE ~
+      - /Users/italo/.ssh/:/home/nifi/.ssh # DO NOT USE ~
     ports:
       - target: 18080
         published: 18080
@@ -138,8 +136,8 @@ services:
       GIT_CHECKOUT_BRANCH: master
       FLOW_PROVIDER_GIT_FLOW_STORAGE_DIRECTORY: /opt/nifi-registry/flow-storage-git
       FLOW_PROVIDER_GIT_REMOTE_TO_PUSH: origin
-      GIT_CONFIG_USER_NAME: # Replace this comment with your full name in single quotes.
-      GIT_CONFIG_USER_EMAIL: # Replace this comment with your github e-mail address.
+      GIT_CONFIG_USER_NAME: 'Italo Macellone'
+      GIT_CONFIG_USER_EMAIL: italomacellone@gmail.com
     restart: always
       
   jupyter:
