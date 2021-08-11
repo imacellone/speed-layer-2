@@ -151,3 +151,15 @@ services:
     depends_on:
       - "mongodb"
     restart: always
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase
+    volumes:
+      - ./metabase-data:/metabase-data
+    ports:
+      - "4000:3000"
+    depends_on:
+      - "mongodb"
+    environment:
+      MB_DB_FILE: /metabase-data/metabase.db
+    restart: always
