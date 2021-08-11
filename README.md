@@ -1,5 +1,3 @@
-
-
 # POC - Speed Layer - Open Banking
 
 Instruções de como executar esta POC.
@@ -26,11 +24,11 @@ Instruções de como executar esta POC.
 
 3 .1 - SOMENTE LINUX e MAC:
 
-- Dê permissão de execução ao script:
-`chmod +x setup.sh`
+- Dê permissão de execução aos scripts:
+`chmod +x *.sh`
 
 - Execute o script e responda a cada pergunta com seus dados:
-`./setup.sh`
+`./poc-setup-unix.sh`
 
 3 .2 - SOMENTE WINDOWS: Substitua os comentários em docker-compose.yml com as suas próprias informações:
  
@@ -42,7 +40,7 @@ Instruções de como executar esta POC.
 
 1 - Em um terminal, abra o diretório raiz do projeto.
 
-2 - Execute: `sudo docker-compose up -d` .  *A primeira execução deste comando pode levar vários minutos.*
+2 - Execute: `./poc-start-unix.sh` .  *A primeira execução deste comando pode levar vários minutos.*
 
 ### Acesse as duas instâncias de NiFi
 **Instância 1:** `http://localhost:8080/nifi`
@@ -95,10 +93,12 @@ Há diversas maneiras de parar os contêineres. Rode algum dos seguintes comando
 
 1 - Apenas para os contêineres. Nenhum dado é perdido:
 
-`sudo docker-compose stop`
+`./poc-stop-unix.sh`
 
 2 - Para os contêineres e os destrói: (Com exceção dos dados do MongoDB, todos os dados serão perdidos. Para também excluir os dados do MongoDB, exclua o seguinte diretório: `speed-layer/mongo`)
 
-`sudo docker-compose down`
+`./poc-rm-containers-unix.sh`
 
+3 - Para deletar todos os dados persistidos pelo MongoDB:
+`./poc-rm-persisted-data-unix.sh`
 
