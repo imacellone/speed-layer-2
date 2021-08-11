@@ -125,7 +125,8 @@ services:
     image: michalklempa/nifi-registry:0.8.0-01
     container_name: nifi-registry
     volumes:
-      - /Users/italo/.ssh:/home/nifi/.ssh
+    # REPLACE THE DIRECTORY BEFORE THE : WITH THE ONE THAT CONTAINS YOUR SSH KEYS
+      - /Users/italo/.ssh:/home/nifi/.ssh # DO NOT USE ~
     ports:
       - target: 18080
         published: 18080
@@ -151,6 +152,7 @@ services:
     depends_on:
       - "mongodb"
     restart: always
+    
   metabase:
     image: metabase/metabase:latest
     container_name: metabase
