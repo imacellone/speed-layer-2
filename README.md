@@ -40,7 +40,7 @@ Instruções de como executar esta POC.
 
 1 - Em um terminal, abra o diretório raiz do projeto.
 
-2 - Execute: `sudo docker-compose up -d` .  *A primeira execução deste comando pode levar vários minutos.*
+2 - Execute: `./poc-start-unix.sh` .  *A primeira execução deste comando pode levar vários minutos.*
 
 ### Acesse as duas instâncias de NiFi
 **Instância 1:** `http://localhost:8080/nifi`
