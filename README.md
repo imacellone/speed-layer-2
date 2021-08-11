@@ -1,5 +1,3 @@
-
-
 # POC - Speed Layer - Open Banking
 
 Instruções de como executar esta POC.
@@ -26,11 +24,11 @@ Instruções de como executar esta POC.
 
 3 .1 - SOMENTE LINUX e MAC:
 
-- Dê permissão de execução ao script:
-`chmod +x setup.sh`
+- Dê permissão de execução aos scripts:
+`chmod +x *.sh`
 
 - Execute o script e responda a cada pergunta com seus dados:
-`./setup.sh`
+`./poc-setup-unix.sh`
 
 3 .2 - SOMENTE WINDOWS: Substitua os comentários em docker-compose.yml com as suas próprias informações:
  
