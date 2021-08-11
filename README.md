@@ -93,10 +93,10 @@ Há diversas maneiras de parar os contêineres. Rode algum dos seguintes comando
 
 1 - Apenas para os contêineres. Nenhum dado é perdido:
 
-`sudo docker-compose stop`
+`./poc-stop-unix.sh`
 
 2 - Para os contêineres e os destrói: (Com exceção dos dados do MongoDB, todos os dados serão perdidos. Para também excluir os dados do MongoDB, exclua o seguinte diretório: `speed-layer/mongo`)
 
-`sudo docker-compose down`
+`./poc-rm-containers-unix.sh`
 
 
