@@ -22,7 +22,17 @@ Instruções de como executar esta POC.
  
 2 - Clone **este** repositório. *Para mais informações: https://tinyurl.com/6bhk89tz*
 
-3 - Substitua os comentários em docker-compose.yml com as suas próprias informações:
+3 - Configuração do docker-compose.yml:
+
+3 .1 - SOMENTE LINUX e MAC:
+
+- Dê permissão de execução ao script:
+`chmod +x setup.sh`
+
+- Execute o script e responda a cada pergunta com seus dados:
+`./setup.sh`
+
+3 .2 - SOMENTE WINDOWS: Substitua os comentários em docker-compose.yml com as suas próprias informações:
  
  - Mapeamento do volume do NiFi Registry: Diretório da sua chave ssh.
  - Seu nome.
