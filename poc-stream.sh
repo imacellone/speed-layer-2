@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./streaming/script/streaming.sh
+sudo docker-compose -f streaming/docker-compose.yml up 
