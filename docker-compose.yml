@@ -124,7 +124,7 @@ services:
     container_name: nifi-registry
     volumes:
     # REPLACE THE DIRECTORY BEFORE THE : WITH THE ONE THAT CONTAINS YOUR SSH KEYS
-      - /Users/italo/.ssh/:/home/nifi/.ssh
+      - /home/franciscobessa/.ssh:/home/nifi/.ssh
     ports:
       - target: 18080
         published: 18080
@@ -136,8 +136,8 @@ services:
       GIT_CHECKOUT_BRANCH: master
       FLOW_PROVIDER_GIT_FLOW_STORAGE_DIRECTORY: /opt/nifi-registry/flow-storage-git
       FLOW_PROVIDER_GIT_REMOTE_TO_PUSH: origin
-      GIT_CONFIG_USER_NAME: 'Italo Macellone'
-      GIT_CONFIG_USER_EMAIL: italomacellone@gmail.com
+      GIT_CONFIG_USER_NAME: 'Mateus Bessa'
+      GIT_CONFIG_USER_EMAIL: mateusbessa@gmail.com
     restart: always
       
   jupyter:
