@@ -24,7 +24,7 @@ Instruções de como executar esta POC.
 
 3 - Configuração do docker-compose.yml:
 
-3 .1 - SOMENTE Linux e Mac:
+3 .1 - SOMENTE LINUX e MAC:
 
 - Dê permissão de execução ao script:
 `chmod +x setup.sh`
