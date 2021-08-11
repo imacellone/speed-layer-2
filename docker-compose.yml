@@ -137,8 +137,8 @@ services:
       GIT_CHECKOUT_BRANCH: master
       FLOW_PROVIDER_GIT_FLOW_STORAGE_DIRECTORY: /opt/nifi-registry/flow-storage-git
       FLOW_PROVIDER_GIT_REMOTE_TO_PUSH: origin
-      GIT_CONFIG_USER_NAME: 'italomacellone@gmail.com'
-      GIT_CONFIG_USER_EMAIL: italomacellone@gmail.com
+      GIT_CONFIG_USER_NAME: # Replace this comment with your full name in single quotes.
+      GIT_CONFIG_USER_EMAIL: # Replace this comment with your github e-mail address.
     restart: always
       
   jupyter:
