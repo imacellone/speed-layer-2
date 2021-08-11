@@ -99,4 +99,6 @@ Há diversas maneiras de parar os contêineres. Rode algum dos seguintes comando
 
 `./poc-rm-containers-unix.sh`
 
+3 - Para deletar todos os dados persistidos pelo MongoDB:
+`./poc-rm-persisted-data-unix.sh`
 
