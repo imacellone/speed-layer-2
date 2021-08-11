@@ -124,7 +124,7 @@ services:
     container_name: nifi-registry
     volumes:
     # REPLACE THE DIRECTORY BEFORE THE : WITH THE ONE THAT CONTAINS YOUR SSH KEYS
-      - /Users/italo/.ssh/:/home/nifi/.ssh # DO NOT USE ~
+      - /Users/italo/.ssh/:/home/nifi/.ssh
     ports:
       - target: 18080
         published: 18080
