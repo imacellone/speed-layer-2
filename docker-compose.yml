@@ -123,7 +123,7 @@ services:
     image: michalklempa/nifi-registry:0.8.0-01
     container_name: nifi-registry
     volumes:
-    # REPLACE THE DIRECTORY BEFORE THE : WITH THE ONE THAT CONTAINS YOUR SSH KEYS
+    # REPLACE THE DIRECTORY BEFORE THE : WITH THE ONE THAT CONTAINS YOUR SSH KEYS:
       - /home/franciscobessa/.ssh:/home/nifi/.ssh
     ports:
       - target: 18080
@@ -136,7 +136,9 @@ services:
       GIT_CHECKOUT_BRANCH: master
       FLOW_PROVIDER_GIT_FLOW_STORAGE_DIRECTORY: /opt/nifi-registry/flow-storage-git
       FLOW_PROVIDER_GIT_REMOTE_TO_PUSH: origin
+      # REPLACE WITH YOUR FULL NAME IN SINGLE QUOTES:
       GIT_CONFIG_USER_NAME: 'Mateus Bessa'
+      # REPLACE WITH THE E-MAIL ASSOCIATED WITH YOUR GITHUB ACCOUNT:
       GIT_CONFIG_USER_EMAIL: mateusbessa@gmail.com
     restart: always
       
