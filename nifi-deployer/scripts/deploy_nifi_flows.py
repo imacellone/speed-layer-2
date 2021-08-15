@@ -3,71 +3,77 @@
 import nipyapi
 import requests
 import time
+import logging
+
+""" Logging """
+log = logging.getLogger("Nifi-Deployer")
+log.setLevel(logging.INFO)
+logging.getLogger('nipyapi.versioning').setLevel(logging.INFO)
+logging.getLogger('nipyapi.utils').setLevel(logging.INFO)
+
+""" Suffixes """
+api_suffix = "-api"
+nifi_suffix = "/nifi"
+registry_suffix = "/nifi-registry"
 
 """NiFi Endpoints"""
-nifi_message_producer_endpoint = "http://nifi-file-reader:8080/nifi-api" 
-nifi_message_consumer_endpoint = "http://nifi-kafka-consumer:8080/nifi-api"
-nifi_system_diagnostics_uri = "/system-diagnostics"
-nifi_message_producer_health_check = nifi_message_producer_endpoint + nifi_system_diagnostics_uri
-nifi_message_consumer_health_check = nifi_message_consumer_endpoint + nifi_system_diagnostics_uri 
+nifi_producer_base_url = "http://nifi-file-reader:8080"
+nifi_consumer_base_url = "http://nifi-kafka-consumer:8080"
+
+nifi_producer_ui_url = nifi_producer_base_url + nifi_suffix
+nifi_consumer_ui_url = nifi_consumer_base_url + nifi_suffix
+
+nifi_producer_api = nifi_producer_ui_url + api_suffix
+nifi_consumer_api = nifi_consumer_ui_url + api_suffix
+all_nifi_apis = [nifi_producer_api, nifi_consumer_api]
 
 """NiFi-Registry properties"""
-nifi_registry_name = "Nifi Registry"
-nifi_registry_url = "http://nifi-registry:18080"
-nifi_registry_description = nifi_registry_name
-
-"""CHECK IF IT IS ALREADY IMPORTED"""
+registry_base_url = "http://nifi-registry:18080"
+registry_ui_url = registry_base_url + registry_suffix
+registry_api = registry_ui_url + api_suffix
+registry_name = "Nifi Registry"
+registry_description = registry_name
 
 """DEPLOY"""
 
-def wait_for_nifis():
-    nifi_health_check_urls = [nifi_message_consumer_health_check, nifi_message_producer_health_check]
-    for url in nifi_health_check_urls:
-        wait_status_ok(url)
-
-def wait_status_ok(url):
-    wait_time = 10
-    status_code = 404
-    while status_code != requests.codes.ok:
-        try:
-            status_code = requests.get(url).status_code 
-        except:
-            time.sleep(wait_time)
+def wait_nifis_up():
+    for instance in all_nifi_apis + [registry_api]:
+        log.info("Waiting for " + instance + " to be ready")
+        nipyapi.utils.set_endpoint(instance)
+        nipyapi.utils.wait_to_complete(
+            test_function=nipyapi.utils.is_endpoint_up,
+            endpoint_url=instance.replace("-api", ""),
+            nipyapi_delay=nipyapi.config.long_retry_delay,
+            nipyapi_max_wait=nipyapi.config.long_max_wait
+        )
+        log.info(instance + " is ready")
 
 def get_nifis_without_registry():
-    endpoints = [nifi_message_producer_endpoint, nifi_message_consumer_endpoint]
     result = []
-    for endpoint in endpoints:
+    for endpoint in all_nifi_apis:
        nipyapi.config.nifi_config.host = endpoint
        clients = nipyapi.versioning.list_registry_clients()
        if not clients.registries: 
            result.append(endpoint)
-           print(endpoint + " added to the list of endpoints without Registry")
+           log.info(endpoint + " added to the list of endpoints still without Registry.")
     return result
 
 def attach_nifis_to_registry(endpoints):
     for endpoint in endpoints:
-        attach_nifi_to_registry(
-            endpoint,
-            nifi_registry_name,
-            nifi_registry_url,
-            nifi_registry_description
+        nipyapi.utils.set_endpoint(endpoint)
+        nipyapi.versioning.create_registry_client(
+            name=registry_name,
+            uri=registry_base_url,
+            description=registry_description
         )
-        print(endpoint + " has been added a Registry")
-
-def attach_nifi_to_registry(nifi_endpoint, registry_name, registry_url, registry_description):
-    nipyapi.utils.set_endpoint(nifi_endpoint)
-    nipyapi.versioning.create_registry_client(
-        name=registry_name,
-        uri=registry_url,
-        description=registry_description
-    )
+        log.info("NiFi-Registry has been added to: " + endpoint + " successfully.")
 
 def main():
-    wait_for_nifis()
+    """wait_for_nifis()"""
+    wait_nifis_up()
     nifis_to_setup = get_nifis_without_registry()
     attach_nifis_to_registry(nifis_to_setup)
-    print("Both NiFi instances are now connected to NiFi-Registry!")
+    log.info("All NiFi instances have now a Registry configured.")
 
 if __name__ == "__main__":
     main()
