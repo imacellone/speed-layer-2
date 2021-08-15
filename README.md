@@ -48,14 +48,6 @@ Instruções de como executar esta POC.
 **Instância 2:** `http://localhost:9090/nifi`
 
 
-### Em cada instância:
-Controller Settings -> Registry Clients -> Add:
-
-**Name:** *Nifi Registry*, **URL:** *http://nifi-registry:18080*
-
-Em seguida: Botão direito do mouse no canvas -> Refresh.
-
-
 ### Na instância 1:
 Add Process Group -> Import:
 
