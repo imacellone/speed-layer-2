@@ -2,8 +2,8 @@
 
 import nipyapi
 import requests
-import time
 import logging
+import os
 
 """ Logging """
 log = logging.getLogger("Nifi-Deployer")
@@ -34,11 +34,15 @@ registry_api = registry_ui_url + api_suffix
 registry_name = "Nifi Registry"
 registry_description = registry_name
 
-"""DEPLOY"""
+producer_version = int(os.environ['NIFI_PRODUCER_FLOW_VERSION'])
+consumer_version = int(os.environ['NIFI_CONSUMER_FLOW_VERSION'])
+producer_process_group_name = os.environ['NIFI_PRODUCER_PG_NAME']
+consumer_process_group_name = os.environ['NIFI_CONSUMER_PG_NAME']
 
 def wait_nifis_up():
+    log.info("WAITING UNTIL ALL NIFI INSTANCES ARE READY...")
     for instance in all_nifi_apis + [registry_api]:
-        log.info("Waiting for " + instance + " to be ready")
+        log.info("WAITING FOR " + instance + " TO BE READY")
         nipyapi.utils.set_endpoint(instance)
         nipyapi.utils.wait_to_complete(
             test_function=nipyapi.utils.is_endpoint_up,
@@ -46,7 +50,8 @@ def wait_nifis_up():
             nipyapi_delay=nipyapi.config.long_retry_delay,
             nipyapi_max_wait=nipyapi.config.long_max_wait
         )
-        log.info(instance + " is ready")
+        log.info(instance + "IS READY.")
+    log.info("ALL NIFI INSTANCES ARE READY.")
 
 def get_nifis_without_registry():
     result = []
@@ -55,7 +60,7 @@ def get_nifis_without_registry():
        clients = nipyapi.versioning.list_registry_clients()
        if not clients.registries: 
            result.append(endpoint)
-           log.info(endpoint + " added to the list of endpoints still without Registry.")
+           log.info(endpoint + " ADDED TO THE LIST OF ENDPOINTS STILL WITHOUT REGISTRY.")
     return result
 
 def attach_nifis_to_registry(endpoints):
@@ -66,14 +71,48 @@ def attach_nifis_to_registry(endpoints):
             uri=registry_base_url,
             description=registry_description
         )
-        log.info("NiFi-Registry has been added to: " + endpoint + " successfully.")
+        log.info("NIFI-REGISTRY HAS BEEN ADDED TO: " + endpoint + " SUCCESSFULLY.")
+
+def deploy_flows():
+    deploy_flow(nifi_producer_api, "message-producer", "message-producer", producer_version, producer_process_group_name)
+    deploy_flow(nifi_consumer_api, "message-consumer", "write-to-mongo", consumer_version, consumer_process_group_name)
+
+def deploy_flow(nifi_api, bucket_name, flow_name, version_number, process_group_name):
+    nipyapi.utils.set_endpoint(nifi_api)
+    nipyapi.utils.set_endpoint(registry_api)
+    if nipyapi.canvas.get_process_group(process_group_name, greedy=False):
+        log.info(process_group_name + " ALREADY DEPLOYED. SKIPPING...")
+        return
+    else:
+        log.info("DEPLOYING PROCESS GROUP NAME: " + process_group_name)
+    bucket = nipyapi.versioning.get_registry_bucket(bucket_name)
+    flow = nipyapi.versioning.get_flow_in_bucket(
+        bucket_id=bucket.identifier,
+        identifier=flow_name
+    )
+    reg_client = nipyapi.versioning.get_registry_client(registry_name)
+    nipyapi.versioning.deploy_flow_version(
+        parent_id=nipyapi.canvas.get_root_pg_id(),
+        location=(20, 20),
+        bucket_id=bucket.identifier,
+        flow_id=flow.identifier,
+        reg_client_id=reg_client.id,
+        version=version_number
+    )
+    """pg_id = nipyapi.canvas.get_process_group(process_group_name, greedy=False).component.id
+    nipyapi.canvas.schedule_process_group(pg_id, True)
+
+def start_flows():
+    pass
+"""
 
 def main():
-    """wait_for_nifis()"""
     wait_nifis_up()
     nifis_to_setup = get_nifis_without_registry()
     attach_nifis_to_registry(nifis_to_setup)
-    log.info("All NiFi instances have now a Registry configured.")
+    deploy_flows()
+    """start_flows()"""
+    log.info("ALL NIFI INSTANCES HAVE BEEN SUCCESSFULLY DEPLOYED. ENJOY!")
 
 if __name__ == "__main__":
     main()

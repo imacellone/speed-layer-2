@@ -171,6 +171,11 @@ services:
     container_name: nifi-deployer
     volumes:
       - ./nifi-deployer/scripts:/scripts
+    environment:
+      - NIFI_PRODUCER_FLOW_VERSION=13
+      - NIFI_CONSUMER_FLOW_VERSION=13
+      - NIFI_PRODUCER_PG_NAME=Leitura Streaming
+      - NIFI_CONSUMER_PG_NAME=Escrever no Mongo
     depends_on:
       - "mongodb"
       - "zookeeper-1"
