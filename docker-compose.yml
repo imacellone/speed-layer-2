@@ -123,8 +123,8 @@ services:
     image: michalklempa/nifi-registry:0.8.0-01
     container_name: nifi-registry
     volumes:
-    # REPLACE THE DIRECTORY BEFORE THE : WITH THE ONE THAT CONTAINS YOUR SSH KEYS:
-      - /home/franciscobessa/.ssh:/home/nifi/.ssh
+    # REPLACE THE DIRECTORY BEFORE THE : WITH THE  THAT CONTAINS YOUR SSH KEYS:
+      - /Users/italo/.ssh/:/home/nifi/.ssh
     ports:
       - target: 18080
         published: 18080
@@ -137,9 +137,9 @@ services:
       FLOW_PROVIDER_GIT_FLOW_STORAGE_DIRECTORY: /opt/nifi-registry/flow-storage-git
       FLOW_PROVIDER_GIT_REMOTE_TO_PUSH: origin
       # REPLACE WITH YOUR FULL NAME IN SINGLE QUOTES:
-      GIT_CONFIG_USER_NAME: 'Mateus Bessa'
+      GIT_CONFIG_USER_NAME: 'Italo Macellone'
       # REPLACE WITH THE E-MAIL ASSOCIATED WITH YOUR GITHUB ACCOUNT:
-      GIT_CONFIG_USER_EMAIL: mateusbessa@gmail.com
+      GIT_CONFIG_USER_EMAIL: italomacellone@gmail.com
     restart: always
       
   jupyter:
@@ -165,3 +165,15 @@ services:
     environment:
       MB_DB_FILE: /metabase-data/metabase.db
     restart: always
+
+  nifi-deployer:
+    build: ./nifi-deployer
+    container_name: nifi-deployer
+    volumes:
+      - ./nifi-deployer/scripts:/scripts
+    depends_on:
+      - "mongodb"
+      - "zookeeper-1"
+      - "nifi-file-reader"
+      - "nifi-kafka-consumer"
+      - "nifi-registry"
