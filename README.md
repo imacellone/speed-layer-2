@@ -47,19 +47,6 @@ Instruções de como executar esta POC.
 
 **Instância 2:** `http://localhost:9090/nifi`
 
-
-### Na instância 1:
-Add Process Group -> Import:
-
-**Bucket:** *message-producer*, **Flow Name:** *message-producer*.
-
-
-### Na instância 2:
-Add Process Group -> Import:
-
-**Bucket:** *message-consumer*, **Flow Name:** *write-to-mongo*.
-
-
 ## Execução
 **Em cada instância:**  Inicie os processadores do Process Group recém importado.
 
