@@ -194,3 +194,14 @@ services:
       - "nifi-file-reader"
       - "nifi-kafka-consumer"
       - "nifi-registry"
+
+  streaming:
+    image: alpine:3.14.1
+    container_name: streaming
+    volumes:
+      - ./streaming/script:/script
+      - ./streaming/input:/data/input
+      - ./streaming/output:/data/output
+    command: "sh -c 'cd /script && chmod +x streaming.sh && sh streaming.sh --wait'"
+    depends_on:
+      - "nifi-deployer"

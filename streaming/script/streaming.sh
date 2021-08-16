@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ $# -eq 1 ] && [ "$1" = "--wait" ]; then
+    echo "Waiting 2 minutes until all NiFi instances are deployed and running"
+    sleep 2m
+fi
+
 echo "Preparing..."
 
 input="/data/input/adult.data"
