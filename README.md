@@ -18,9 +18,7 @@
 ## Configuração
 
 1 -  Certifique-se de possuir chaves SSH **(SEM SENHA)** configuradas em sua máquina.
- 
 2 - Clone **este** repositório.
-
 3 - Dê permissão de execução aos scripts:
 
 `chmod +x *.sh`
@@ -43,7 +41,7 @@ Este script irá:
 Após os dados serem processados pelo Apache NiFi, eles são inseridos em um database chamado **raw**, na collection chamada **adults**.
 Para acessar esses dados:
 
-    ./poc-open-mongo.sh
+    ./mongo.sh
     use raw
     db.adults.find().pretty()
 
@@ -72,9 +70,8 @@ Para manipular, com Python ou R, os dados persistidos no MongoDB, acesse:
 ## Encerrar
 1 - Para os contêineres e os destrói (Com exceção dos dados do MongoDB, todos os dados serão perdidos):
 
-`./poc-rm-containers-unix.sh`
+`./rm-containers.sh`
 
 2- Para remover todos os dados persistidos pelo MongoDB:
 
-`./poc-rm-persisted-data-unix.sh`
-
+`./rm-persisted.sh`
