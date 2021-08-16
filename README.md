@@ -51,12 +51,12 @@ Para verificar a quantidade de registros inseridos:
 ## Metabase
 Verifique que os registros da simulação de streaming estão sendo/foram inseridos.
 
-- Para verificar os registros através do Metabase:
-
+### URL
 `http://localhost:4000`
 
-- Credenciais:
+### Credenciais
 E-mail: `fiap@fiap.com`
+
 Password: `fiap2021`
 
 ## Jupyter
@@ -64,7 +64,7 @@ Para manipular, com Python ou R, os dados persistidos no MongoDB, acesse:
 
 `http://localhost:8888`
 
-**Há um Notebook criado com uma conexão ao banco de dadosB**
+**Há um Notebook criado com uma conexão ao banco de dados**
 
 ## Encerrar
 1 - Para os contêineres e os destrói: (Com exceção dos dados do MongoDB, todos os dados serão perdidos.)
