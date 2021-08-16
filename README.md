@@ -40,7 +40,7 @@ Este script irá:
 - Após um delay de 2 minutos, iniciar a simulação do streaming de dados;
  
 ## MongoDB
-Após os dados serem processados pelo Apache NiFi, eles são inseridos em um database chamado **raw**, na collection chamada **adults**.
+Após os dados serem processados pelo Apache NiFi, eles são inseridos no database **raw**, na collection **adults**.
 Para acessar esses dados:
 
     ./mongo.sh
