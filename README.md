@@ -27,10 +27,10 @@
 
 4 - Execute o script e responda a cada pergunta com seus dados:
 
-`./poc-setup-unix.sh`
+`./setup.sh`
 
 ## Execução
-1 - `./poc-start-unix.sh`
+1 - `./start.sh`
 *A primeira execução deste comando pode levar vários minutos.*
 
 Este script irá:
