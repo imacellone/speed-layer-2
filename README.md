@@ -70,7 +70,7 @@ Password: `fiap2021`
 
 `./poc-rm-containers-unix.sh`
 
-2- Para deletar todos os dados persistidos pelo MongoDB e Output Streaming:
+2- Para remover todos os dados persistidos pelo MongoDB:
 
 `./poc-rm-persisted-data-unix.sh`
 
