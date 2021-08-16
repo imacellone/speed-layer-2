@@ -17,8 +17,10 @@
 
 ## Configuração
 
-1 -  Certifique-se de possuir chaves SSH **(SEM SENHA)** configuradas em sua máquina.
-2 - Clone **este** repositório.
+1 -  Certifique-se de possuir chaves SSH **(SEM SENHA)** configuradas em sua máquina;
+
+2 - Clone **este** repositório;
+
 3 - Dê permissão de execução aos scripts:
 
 `chmod +x *.sh`
