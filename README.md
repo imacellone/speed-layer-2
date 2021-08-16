@@ -17,7 +17,7 @@
 
 ## Configuração
 
-1 -  Certifique-se de possuir chaves SSH **SEM SENHA** configuradas em sua máquina.
+1 -  Certifique-se de possuir chaves SSH **(SEM SENHA)** configuradas em sua máquina.
  
 2 - Clone **este** repositório.
 
