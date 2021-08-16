@@ -44,6 +44,7 @@ Após os dados serem processados pelo Apache NiFi, eles são inseridos no databa
 Para acessá-los:
 
     ./mongo.sh
+    mongo
     use raw
     db.adults.find().pretty()
 
