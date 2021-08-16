@@ -173,9 +173,21 @@ services:
       - ./nifi-deployer/scripts:/scripts
     environment:
       - NIFI_PRODUCER_FLOW_VERSION=13
-      - NIFI_CONSUMER_FLOW_VERSION=13
       - NIFI_PRODUCER_PG_NAME=Leitura Streaming
+      - NIFI_PRODUCER_BUCKET_NAME=message-producer 
+      - NIFI_PRODUCER_FLOW_NAME=message-producer
+      - NIFI_PRODUCER_URL=http://nifi-file-reader
+      - NIFI_PRODUCER_INTERNAL_PORT=8080
+      - NIFI_CONSUMER_FLOW_VERSION=13
       - NIFI_CONSUMER_PG_NAME=Escrever no Mongo
+      - NIFI_CONSUMER_BUCKET_NAME=message-consumer
+      - NIFI_CONSUMER_FLOW_NAME=write-to-mongo
+      - NIFI_CONSUMER_URL=http://nifi-kafka-consumer
+      - NIFI_CONSUMER_INTERNAL_PORT=8080
+      - REGISTRY_URL=http://nifi-registry
+      - REGISTRY_INTERNAL_PORT=18080
+      - REGISTRY_NAME=Nifi Registry
+      - REGISTRY_DESCRIPTION=Nifi Registry
     depends_on:
       - "mongodb"
       - "zookeeper-1"
