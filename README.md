@@ -75,7 +75,10 @@ Para verificar os registros através do Metabase:
 
 `http://localhost:4000`
 
+Dados de acesso:
+
 Email address: fiap@fiap.com
+
 Password: fiap2021
 
 Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em python ou R, acessando:
