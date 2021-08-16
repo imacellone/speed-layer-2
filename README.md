@@ -47,23 +47,13 @@ Instruções de como executar esta POC.
 
 **Instância 2:** `http://localhost:9090/nifi`
 
-
-### Na instância 1:
-Add Process Group -> Import:
-
-**Bucket:** *message-producer*, **Flow Name:** *message-producer*.
-
-
-### Na instância 2:
-Add Process Group -> Import:
-
-**Bucket:** *message-consumer*, **Flow Name:** *write-to-mongo*.
-
-
 ## Execução
 **Em cada instância:**  Inicie os processadores do Process Group recém importado.
 
- - O arquivo speed-layer/nifi_file/input/bank.xlsx será consumido pela **Instância 1**.
+- Execute o script para iniciar a simulação de streaming
+`./poc-stream.sh`
+
+ - O arquivo speed-layer-2/streaming/input/adults.data será consumido e criado na pasta output linha a linha, simulando o streaming.
  
  Acesse o contêiner do MongoDB. Para isso, em um terminal, execute os seguintes comandos:
 
@@ -71,14 +61,31 @@ Add Process Group -> Import:
         
     mongo
 
-    use banking
+    use raw
 
-    db.transactions.find().pretty()
+    db.adults.find().pretty()
 
 Para verificar a quantidade de registros inseridos:
-`db.transactions.count()`
 
-Verifique que os registros da planilha estão sendo/foram inseridos.
+`db.adults.count()`
+
+Verifique que os registros da simulação de streaming estão sendo/foram inseridos.
+
+Para verificar os registros através do Metabase:
+
+`http://localhost:4000`
+
+Dados de acesso:
+
+Email address: fiap@fiap.com
+
+Password: fiap2021
+
+Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em python ou R, acessando:
+
+`http://localhost:8888`
+
+**Já possui uma notebook criado com conexão de teste ao banco no MongoDB**
 
 ## Encerrar
 Há diversas maneiras de parar os contêineres. Rode algum dos seguintes comandos no diretório raiz do projeto: 
@@ -87,10 +94,10 @@ Há diversas maneiras de parar os contêineres. Rode algum dos seguintes comando
 
 `./poc-stop-unix.sh`
 
-2 - Para os contêineres e os destrói: (Com exceção dos dados do MongoDB, todos os dados serão perdidos. Para também excluir os dados do MongoDB, exclua o seguinte diretório: `speed-layer/mongo`)
+2 - Para os contêineres e os destrói: (Com exceção dos dados do MongoDB, todos os dados serão perdidos. Para também excluir os dados do MongoDB, exclua o seguinte diretório: `speed-layer-2/mongo`)
 
 `./poc-rm-containers-unix.sh`
 
-3 - Para deletar todos os dados persistidos pelo MongoDB:
+3 - Para deletar todos os dados persistidos pelo MongoDB e Output Streaming:
 `./poc-rm-persisted-data-unix.sh`
 
