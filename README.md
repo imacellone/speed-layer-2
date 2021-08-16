@@ -50,7 +50,10 @@ Instruções de como executar esta POC.
 ## Execução
 **Em cada instância:**  Inicie os processadores do Process Group recém importado.
 
- - O arquivo speed-layer/nifi_file/input/bank.xlsx será consumido pela **Instância 1**.
+- Execute o script para iniciar a simulação de streaming
+`./poc-stream.sh`
+
+ - O arquivo speed-layer-2/streaming/input/adults.data será consumido e criado na pasta output linha a linha, simulando o streaming.
  
  Acesse o contêiner do MongoDB. Para isso, em um terminal, execute os seguintes comandos:
 
@@ -58,14 +61,23 @@ Instruções de como executar esta POC.
         
     mongo
 
-    use banking
+    use raw
 
-    db.transactions.find().pretty()
+    db.adults.find().pretty()
 
 Para verificar a quantidade de registros inseridos:
-`db.transactions.count()`
+`db.adults.count()`
 
-Verifique que os registros da planilha estão sendo/foram inseridos.
+Verifique que os registros da simulação de streaming estão sendo/foram inseridos.
+
+Para verificar os registros através do Metabase
+`http://localhost:4000`
+Email address: fiap@fiap.com
+Password: fiap2021
+
+Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em python ou R, acessando:
+`http://localhost:8888`
+**Já possui uma notebook criado com conexão de teste ao banco**
 
 ## Encerrar
 Há diversas maneiras de parar os contêineres. Rode algum dos seguintes comandos no diretório raiz do projeto: 
