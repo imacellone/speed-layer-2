@@ -42,13 +42,7 @@ Instruções de como executar esta POC.
 
 2 - Execute: `./poc-start-unix.sh` .  *A primeira execução deste comando pode levar vários minutos.*
 
-### Acesse as duas instâncias de NiFi
-**Instância 1:** `http://localhost:8080/nifi`
-
-**Instância 2:** `http://localhost:9090/nifi`
-
 ## Execução
-**Em cada instância:**  Inicie os processadores do Process Group recém importado.
 
 - Execute o script para iniciar a simulação de streaming
 `./poc-stream.sh`
