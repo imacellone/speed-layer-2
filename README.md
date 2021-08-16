@@ -11,7 +11,7 @@
 
 ## Pré-requisitos para a execução
 
- 1. **Git** instalado e configurado adequadamente.
+ 1. **Git**.
  2. **Docker**.
  3. **Docker Compose**.
 
