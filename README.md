@@ -64,7 +64,7 @@ Para manipular, com Python ou R, os dados persistidos no MongoDB, acesse:
 
 `http://localhost:8888`
 
-**Já há um notebook criado com conexão de teste ao MongoDB**
+**Há um Notebook criado com uma conexão ao banco de dadosB**
 
 ## Encerrar
 1 - Para os contêineres e os destrói: (Com exceção dos dados do MongoDB, todos os dados serão perdidos.)
