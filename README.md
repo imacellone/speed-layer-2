@@ -41,7 +41,7 @@ Este script irá:
  
 ## MongoDB
 Após os dados serem processados pelo Apache NiFi, eles são inseridos no database **raw**, na collection **adults**.
-Para acessar esses dados:
+Para acessá-los:
 
     ./mongo.sh
     use raw
