@@ -35,10 +35,9 @@ Instruções de como executar esta POC.
 
 2 - Execute: `./poc-start-unix.sh` .  *A primeira execução deste comando pode levar vários minutos.*
 
- - O arquivo speed-layer-2/streaming/input/adults.data será consumido e criado na pasta output linha a linha, simulando o streaming.
+ - O simulação do streaming de dados deve iniciar dentro de 2 minutos após a inicialização dos contêineres.
  
- Acesse o contêiner do MongoDB. Para isso, em um terminal, execute os seguintes comandos:
-
+ ## Acesso ao mongo
     sudo docker exec -it mongodb /bin/bash
         
     mongo
@@ -51,6 +50,8 @@ Para verificar a quantidade de registros inseridos:
 
 `db.adults.count()`
 
+## Metabase
+
 Verifique que os registros da simulação de streaming estão sendo/foram inseridos.
 
 - Para verificar os registros através do Metabase:
@@ -62,6 +63,8 @@ Verifique que os registros da simulação de streaming estão sendo/foram inseri
 Email address: `fiap@fiap.com`
 
 Password: `fiap2021`
+
+## Jupyter
 
 - Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em python ou R, acessando:
 
