@@ -39,7 +39,7 @@ Este script irá:
 - Iniciar todos os process groups do Apache NiFi;
 - Após um delay de 2 minutos, iniciar a simulação do streaming de dados;
  
-## Acesso ao mongo
+## Acesso ao MongoDB
     ./poc-open-mongo.sh
     use raw
     db.adults.find().pretty()
@@ -49,7 +49,7 @@ Para verificar a quantidade de registros inseridos:
 `db.adults.count()`
 
 ## Metabase
-Verifique que os registros da simulação de streaming estão sendo/foram inseridos.
+Utilize-o para verificar os registros, conforme são inseridos:
 
 ### URL
 `http://localhost:4000`
@@ -64,10 +64,10 @@ Para manipular, com Python ou R, os dados persistidos no MongoDB, acesse:
 
 `http://localhost:8888`
 
-**Há um Notebook criado com uma conexão ao banco de dados**
+**Há um Notebook criado com uma conexão ao banco de dados.**
 
 ## Encerrar
-1 - Para os contêineres e os destrói: (Com exceção dos dados do MongoDB, todos os dados serão perdidos.)
+1 - Para os contêineres e os destrói (Com exceção dos dados do MongoDB, todos os dados serão perdidos):
 
 `./poc-rm-containers-unix.sh`
 
