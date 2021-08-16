@@ -22,35 +22,22 @@ Instruções de como executar esta POC.
 
 3 - Configuração do docker-compose.yml:
 
-3 .1 - SOMENTE LINUX e MAC:
-
 - Dê permissão de execução aos scripts:
 `chmod +x *.sh`
 
 - Execute o script e responda a cada pergunta com seus dados:
 `./poc-setup-unix.sh`
 
-3 .2 - SOMENTE WINDOWS: Substitua os comentários em docker-compose.yml com as suas próprias informações:
- 
- - Mapeamento do volume do NiFi Registry: Diretório da sua chave ssh.
- - Seu nome.
- - Endereço de e-mail relacionado à sua conta do GitHub.
 
-## Preparação
+## Execução
 
 1 - Em um terminal, abra o diretório raiz do projeto.
 
 2 - Execute: `./poc-start-unix.sh` .  *A primeira execução deste comando pode levar vários minutos.*
 
-## Execução
-
-- Execute o script para iniciar a simulação de streaming
-`./poc-stream.sh`
-
- - O arquivo speed-layer-2/streaming/input/adults.data será consumido e criado na pasta output linha a linha, simulando o streaming.
+ - O simulação do streaming de dados deve iniciar dentro de 2 minutos após a inicialização dos contêineres.
  
- Acesse o contêiner do MongoDB. Para isso, em um terminal, execute os seguintes comandos:
-
+ ## Acesso ao mongo
     sudo docker exec -it mongodb /bin/bash
         
     mongo
@@ -63,35 +50,35 @@ Para verificar a quantidade de registros inseridos:
 
 `db.adults.count()`
 
+## Metabase
+
 Verifique que os registros da simulação de streaming estão sendo/foram inseridos.
 
-Para verificar os registros através do Metabase:
+- Para verificar os registros através do Metabase:
 
 `http://localhost:4000`
 
-Dados de acesso:
+- Dados de acesso:
 
-Email address: fiap@fiap.com
+Email address: `fiap@fiap.com`
 
-Password: fiap2021
+Password: `fiap2021`
 
-Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em python ou R, acessando:
+## Jupyter
+
+- Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em python ou R, acessando:
 
 `http://localhost:8888`
 
-**Já possui uma notebook criado com conexão de teste ao banco no MongoDB**
+**Já há um notebook criado com conexão de teste ao banco no MongoDB**
 
 ## Encerrar
 Há diversas maneiras de parar os contêineres. Rode algum dos seguintes comandos no diretório raiz do projeto: 
 
-1 - Apenas para os contêineres. Nenhum dado é perdido:
-
-`./poc-stop-unix.sh`
-
-2 - Para os contêineres e os destrói: (Com exceção dos dados do MongoDB, todos os dados serão perdidos. Para também excluir os dados do MongoDB, exclua o seguinte diretório: `speed-layer-2/mongo`)
+1 - Para os contêineres e os destrói: (Com exceção dos dados do MongoDB, todos os dados serão perdidos.)
 
 `./poc-rm-containers-unix.sh`
 
-3 - Para deletar todos os dados persistidos pelo MongoDB e Output Streaming:
+2- Para deletar todos os dados persistidos pelo MongoDB e Output Streaming:
 `./poc-rm-persisted-data-unix.sh`
 
