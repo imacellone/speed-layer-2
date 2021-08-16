@@ -1,5 +1,7 @@
 # POC - Speed Layer - Open Banking
 
+Aviso: Esta documentação não suporta Windows, apesar de a POC em si suportá-lo.
+
 Instruções de como executar esta POC.
 
 ## Visão Geral da Arquitetura
