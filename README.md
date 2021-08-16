@@ -66,11 +66,13 @@ Instruções de como executar esta POC.
     db.adults.find().pretty()
 
 Para verificar a quantidade de registros inseridos:
+
 `db.adults.count()`
 
 Verifique que os registros da simulação de streaming estão sendo/foram inseridos.
 
 Para verificar os registros através do Metabase:
+
 `http://localhost:4000`
 
 Email address: fiap@fiap.com
@@ -80,7 +82,7 @@ Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em pytho
 
 `http://localhost:8888`
 
-**Já possui uma notebook criado com conexão de teste ao banco**
+**Já possui uma notebook criado com conexão de teste ao banco no MongoDB**
 
 ## Encerrar
 Há diversas maneiras de parar os contêineres. Rode algum dos seguintes comandos no diretório raiz do projeto: 
