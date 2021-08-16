@@ -60,7 +60,7 @@ E-mail: `fiap@fiap.com`
 Password: `fiap2021`
 
 ## Jupyter
-- Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em python ou R, acessando:
+Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em python ou R, acessando:
 
 `http://localhost:8888`
 
