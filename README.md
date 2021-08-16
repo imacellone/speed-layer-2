@@ -91,10 +91,10 @@ Há diversas maneiras de parar os contêineres. Rode algum dos seguintes comando
 
 `./poc-stop-unix.sh`
 
-2 - Para os contêineres e os destrói: (Com exceção dos dados do MongoDB, todos os dados serão perdidos. Para também excluir os dados do MongoDB, exclua o seguinte diretório: `speed-layer/mongo`)
+2 - Para os contêineres e os destrói: (Com exceção dos dados do MongoDB, todos os dados serão perdidos. Para também excluir os dados do MongoDB, exclua o seguinte diretório: `speed-layer-2/mongo`)
 
 `./poc-rm-containers-unix.sh`
 
-3 - Para deletar todos os dados persistidos pelo MongoDB:
+3 - Para deletar todos os dados persistidos pelo MongoDB e Output Streaming:
 `./poc-rm-persisted-data-unix.sh`
 
