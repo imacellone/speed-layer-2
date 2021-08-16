@@ -38,9 +38,7 @@ Instruções de como executar esta POC.
  - O simulação do streaming de dados deve iniciar dentro de 2 minutos após a inicialização dos contêineres.
  
  ## Acesso ao mongo
-    sudo docker exec -it mongodb /bin/bash
-        
-    mongo
+    ./poc-open-mongo.sh
 
     use raw
 
