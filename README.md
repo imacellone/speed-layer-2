@@ -39,7 +39,10 @@ Este script irá:
 - Iniciar todos os process groups do Apache NiFi;
 - Após um delay de 2 minutos, iniciar a simulação do streaming de dados;
  
-## Acesso ao MongoDB
+## MongoDB
+Após os dados serem processados pelo Apache NiFi, eles são inseridos em um database chamado **raw**, na collection chamada **adults**.
+Para acessar esses dados:
+
     ./poc-open-mongo.sh
     use raw
     db.adults.find().pretty()
