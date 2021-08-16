@@ -60,7 +60,7 @@ E-mail: `fiap@fiap.com`
 Password: `fiap2021`
 
 ## Jupyter
-Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em python ou R, acessando:
+Para manipular, com Python ou R, os dados persistidos no MongoDB, acesse:
 
 `http://localhost:8888`
 
