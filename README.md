@@ -53,21 +53,21 @@ Para verificar a quantidade de registros inseridos:
 
 Verifique que os registros da simulação de streaming estão sendo/foram inseridos.
 
-Para verificar os registros através do Metabase:
+- Para verificar os registros através do Metabase:
 
 `http://localhost:4000`
 
-Dados de acesso:
+- Dados de acesso:
 
-Email address: fiap@fiap.com
+Email address: `fiap@fiap.com`
 
-Password: fiap2021
+Password: `fiap2021`
 
-Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em python ou R, acessando:
+- Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em python ou R, acessando:
 
 `http://localhost:8888`
 
-**Já possui uma notebook criado com conexão de teste ao banco no MongoDB**
+**Já há um notebook criado com conexão de teste ao banco no MongoDB**
 
 ## Encerrar
 Há diversas maneiras de parar os contêineres. Rode algum dos seguintes comandos no diretório raiz do projeto: 
