@@ -22,13 +22,16 @@
 2 - Clone **este** repositório.
 
 3 - Dê permissão de execução aos scripts:
+
 `chmod +x *.sh`
 
 4 - Execute o script e responda a cada pergunta com seus dados:
+
 `./poc-setup-unix.sh`
 
 ## Execução
-1 - `./poc-start-unix.sh` .  *A primeira execução deste comando pode levar vários minutos.*
+1 - `./poc-start-unix.sh`
+*A primeira execução deste comando pode levar vários minutos.*
 
 Este script irá:
 - Criar todos os contêineres (Veja o desenho arquitetural acima);
@@ -42,12 +45,14 @@ Este script irá:
     db.adults.find().pretty()
 
 Para verificar a quantidade de registros inseridos:
+
 `db.adults.count()`
 
 ## Metabase
 Verifique que os registros da simulação de streaming estão sendo/foram inseridos.
 
 - Para verificar os registros através do Metabase:
+
 `http://localhost:4000`
 
 - Credenciais:
@@ -56,13 +61,16 @@ Password: `fiap2021`
 
 ## Jupyter
 - Para manipulação dos dados inseridos, poderá ser utilizado o jupyter em python ou R, acessando:
+
 `http://localhost:8888`
 **Já há um notebook criado com conexão de teste ao MongoDB**
 
 ## Encerrar
 1 - Para os contêineres e os destrói: (Com exceção dos dados do MongoDB, todos os dados serão perdidos.)
+
 `./poc-rm-containers-unix.sh`
 
 2- Para deletar todos os dados persistidos pelo MongoDB e Output Streaming:
+
 `./poc-rm-persisted-data-unix.sh`
 
