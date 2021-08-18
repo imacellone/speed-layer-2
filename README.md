@@ -81,22 +81,22 @@ Para manipular, com Python ou R, os dados persistidos no MongoDB, acesse:
 
 
 ## Scripts
-1 - `start.sh`
+1 - `setup.sh`
+- Permite a configuração de campos necessários no docker-compose.yml automaticamente;
+
+2 - `start.sh`
 - Inicia todos os contêineres;
 - Faz deploy de todos os process groups nas instâncias de Apache NiFi;
 - Inicia todos os process groups de todas as instâncias;
 - Inicia a simulação do streaming;
 
-2 - `rm-containers.sh`
+3 - `tail-streaming.sh`
+- Permite acompanhar em tempo real as linhas geradas pelo simulador de streaming;
+
+4 - `rm-containers.sh`
 - Destroi todos os contêineres;
 - Os dados persistidos pelo MongoDB são mantidos;
 
-3 - `rm-persisted.sh`
+5 - `rm-persisted.sh`
 - Remove os dados persistidos pelo MongoDB;
 - Remove os arquivos gerados para simular o streaming;
-
-4 - `setup.sh`
-- Permite a configuração de campos necessários no docker-compose.yml automaticamente;
-
-5 - `tail-streaming.sh`
-- Permite acompanhar em tempo real as linhas geradas pelo simulador de streaming;
