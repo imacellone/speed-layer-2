@@ -94,7 +94,7 @@ Para manipular, com Python ou R, os dados persistidos no MongoDB, acesse:
 - Permite acompanhar em tempo real as linhas geradas pelo simulador de streaming;
 
 4 - `rm-containers.sh`
-- Destroi todos os contêineres;
+- Destrói todos os contêineres;
 - Os dados persistidos pelo MongoDB são mantidos;
 
 5 - `rm-persisted.sh`
