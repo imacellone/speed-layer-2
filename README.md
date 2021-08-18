@@ -1,13 +1,13 @@
 # POC - Speed Layer - Open Banking
 
 #### Avisos
-- Todos os comandos demonstrados devem ser executados no diretório raiz do projeto;
+- **Todos os comandos demonstrados devem ser executados no diretório raiz do projeto;**
 - Esta documentação não suporta Windows, apesar de a POC, em si, suportá-lo;
 
 
 ## Visão Geral da Arquitetura
 
-![Arquitetura - Visão Geral](SpeedLayer.jpg)
+![Arquitetura - Visão Geral](doc/SpeedLayer.jpg)
 
 ## Pré-requisitos para a execução
 
