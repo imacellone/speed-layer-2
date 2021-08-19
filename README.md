@@ -25,25 +25,40 @@
 
 `chmod +x *.sh`
 
-4 - Execute o script e responda a cada pergunta com seus dados:
+## ./cli.sh
+### Opções:
+**1 - Setup Environment** 
+(PRÉ-REQUISITO PARA A CORRETA EXECUÇÃO DA APLICAÇÃO)
+- Permite a configuração de campos necessários no docker-compose.yml automaticamente;
 
-`./setup.sh`
+**2 - Start**
+- **A primeira execução pode durar vários minutos**
+- Inicia todos os contêineres;
+- Faz deploy de todos os process groups nas instâncias de Apache NiFi;
+- Inicia todos os process groups de todas as instâncias;
+- Inicia a simulação do streaming;
 
-## Execução
-1 - `./start.sh`
-*A primeira execução deste comando pode levar vários minutos.*
+**3 - Application Status**
+- Permite visualizar o status de toda a aplicação;
 
-Este script irá:
-- Criar todos os contêineres (Veja o desenho arquitetural acima);
-- Fazer o deploy de todas as instâncias de Apache NiFi;
-- Iniciar todos os process groups do Apache NiFi;
-- Após um delay de 2 minutos, iniciar a simulação do streaming de dados;
+**4 - Tail Streaming**
+- Permite acompanhar em tempo real as linhas geradas pelo simulador de streaming;
+
+**5 - Open MongoDB Conteiner**
+- Acessa o contêiner do MongoDB;
+
+**6 - Remove all Containers**
+- Destrói todos os contêineres;
+- Os dados persistidos pelo MongoDB são mantidos;
+
+**7 - Remove all Persisted Data**
+- Remove os dados persistidos pelo MongoDB;
+- Remove os arquivos gerados para simular o streaming;
  
 ## MongoDB
 Após os dados serem processados pelo Apache NiFi, eles são inseridos no database **raw**, na collection **adults**.
-Para acessá-los:
 
-    ./mongo.sh
+### No conteiner do MongoDB, execute:
     mongo
     use raw
     db.adults.find().pretty()
@@ -51,6 +66,9 @@ Para acessá-los:
 Para verificar a quantidade de registros inseridos:
 
 `db.adults.count()`
+
+- Para sair do MongoDB: **CTRL-D**;
+- Para sair do conteiner do MongoDB: **CTRL-D** (Novamente);
 
 ## Metabase
 Utilize-o para verificar os registros, conforme são inseridos:
@@ -80,23 +98,4 @@ Para manipular, com Python, os dados persistidos no MongoDB, acesse:
 `./rm-persisted.sh`
 
 
-## Scripts
-1 - `setup.sh`
-- Permite a configuração de campos necessários no docker-compose.yml automaticamente;
 
-2 - `start.sh`
-- Inicia todos os contêineres;
-- Faz deploy de todos os process groups nas instâncias de Apache NiFi;
-- Inicia todos os process groups de todas as instâncias;
-- Inicia a simulação do streaming;
-
-3 - `tail-streaming.sh`
-- Permite acompanhar em tempo real as linhas geradas pelo simulador de streaming;
-
-4 - `rm-containers.sh`
-- Destrói todos os contêineres;
-- Os dados persistidos pelo MongoDB são mantidos;
-
-5 - `rm-persisted.sh`
-- Remove os dados persistidos pelo MongoDB;
-- Remove os arquivos gerados para simular o streaming;
