@@ -29,12 +29,13 @@
 ### Toda a execução desta poc é feita através do script: `./cli.sh`
 
 ### Opções:
-**1 - Setup Environment** 
+**1 - Setup Environment**
+
 (PRÉ-REQUISITO PARA A CORRETA EXECUÇÃO DA APLICAÇÃO)
 - Permite a configuração de campos necessários no docker-compose.yml automaticamente;
 
 **2 - Start**
-- **A primeira execução pode durar vários minutos**
+- **A primeira execução pode durar vários minutos;**
 - Inicia todos os contêineres;
 - Faz deploy de todos os process groups nas instâncias de Apache NiFi;
 - Inicia todos os process groups de todas as instâncias;
@@ -45,9 +46,11 @@
 
 **4 - Tail Streaming**
 - Permite acompanhar em tempo real as linhas geradas pelo simulador de streaming;
+- Para sair: CTRL-C. Esta ação faz sair do cli.sh. Basta abri-lo novamente;
 
 **5 - Open MongoDB Conteiner**
 - Acessa o contêiner do MongoDB;
+- Para sair do contêiner: CTRL-D;
 
 **6 - Remove all Containers**
 - Destrói todos os contêineres;
@@ -55,12 +58,12 @@
 
 **7 - Remove all Persisted Data**
 - Remove os dados persistidos pelo MongoDB;
-- Remove os arquivos gerados para simular o streaming;
+- Remove os arquivos gerados para simular o streaming de dados;
  
 ## MongoDB
 Após os dados serem processados pelo Apache NiFi, eles são inseridos no database **raw**, na collection **adults**.
 
-### No conteiner do MongoDB, execute:
+### Uma vez dentro do contêiner do MongoDB (Veja acima), execute:
     mongo
     use raw
     db.adults.find().pretty()
@@ -70,7 +73,6 @@ Para verificar a quantidade de registros inseridos:
 `db.adults.count()`
 
 - Para sair do MongoDB: **CTRL-D**;
-- Para sair do conteiner do MongoDB: **CTRL-D** (Novamente);
 
 ## Metabase
 Utilize-o para verificar os registros, conforme são inseridos:
