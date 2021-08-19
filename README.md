@@ -25,7 +25,9 @@
 
 `chmod +x *.sh`
 
-## ./cli.sh
+## Execução
+### Toda a execução desta poc é feita através do script: `./cli.sh`
+
 ### Opções:
 **1 - Setup Environment** 
 (PRÉ-REQUISITO PARA A CORRETA EXECUÇÃO DA APLICAÇÃO)
