@@ -77,13 +77,12 @@ Para verificar a quantidade de registros inseridos:
 ## Metabase
 Utilize-o para verificar os registros, conforme são inseridos:
 
-### URL
+**URL**
 `http://localhost:4000`
 
-### Credenciais
-E-mail: `fiap@fiap.com`
-
-Password: `fiap2021`
+**Credenciais**
+- E-mail: `fiap@fiap.com`
+- Password: `fiap2021`
 
 ## Jupyter
 Para manipular, com Python, os dados persistidos no MongoDB, acesse:
