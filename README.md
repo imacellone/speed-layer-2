@@ -91,15 +91,3 @@ Para manipular, com Python, os dados persistidos no MongoDB, acesse:
 `http://localhost:8888`
 
 **Há um Notebook criado com uma conexão ao banco de dados.**
-
-## Encerrar
-1 - Para os contêineres e os destrói (Com exceção dos dados do MongoDB, todos os dados serão perdidos):
-
-`./rm-containers.sh`
-
-2- Para remover todos os dados persistidos pelo MongoDB:
-
-`./rm-persisted.sh`
-
-
-
