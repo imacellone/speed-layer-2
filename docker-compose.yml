@@ -124,7 +124,7 @@ services:
     container_name: nifi-registry
     volumes:
     # REPLACE THE DIRECTORY BEFORE THE : WITH THE  THAT CONTAINS YOUR SSH KEYS:
-      - /Users/italo/.ssh/:/home/nifi/.ssh
+      - /home/franciscobessa/.ssh:/home/nifi/.ssh
     ports:
       - target: 18080
         published: 18080
@@ -137,9 +137,9 @@ services:
       FLOW_PROVIDER_GIT_FLOW_STORAGE_DIRECTORY: /opt/nifi-registry/flow-storage-git
       FLOW_PROVIDER_GIT_REMOTE_TO_PUSH: origin
       # REPLACE WITH YOUR FULL NAME IN SINGLE QUOTES:
-      GIT_CONFIG_USER_NAME: 'Italo Macellone'
+      GIT_CONFIG_USER_NAME: 'Mateus Bessa'
       # REPLACE WITH THE E-MAIL ASSOCIATED WITH YOUR GITHUB ACCOUNT:
-      GIT_CONFIG_USER_EMAIL: italomacellone@gmail.com
+      GIT_CONFIG_USER_EMAIL: mateusbessa@gmail.com
     restart: always
       
   jupyter:
@@ -157,7 +157,7 @@ services:
     image: metabase/metabase:latest
     container_name: metabase
     volumes:
-      - ./metabase-data:/metabase-data
+      - ./metabase:/metabase-data
     ports:
       - "4000:3000"
     depends_on:
